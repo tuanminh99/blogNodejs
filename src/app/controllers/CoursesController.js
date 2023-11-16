@@ -23,6 +23,7 @@ class CoursesController {
       .then(() => res.redirect('/'))
       .catch(next);
   }
+  // [GET] /courses/:id/edit
   edit(req, res, next) {
     Course.findById(req.params.id)
       .then((course) =>
@@ -30,13 +31,17 @@ class CoursesController {
       )
       .catch(next);
   }
-
+  // [PUT] /courses/:id
   update(req, res, next) {
     Course.updateOne({ _id: req.params.id }, req.body)
       .then(() => res.redirect('/me/courses-saved'))
-      .catch((error) => {
-        console.log('error', error);
-      });
+      .catch(next);
+  }
+  // [DELETE] /courses/:id
+  delete(req, res, next) {
+    Course.deleteOne({ _id: req.params.id })
+      .then(() => res.redirect('back'))
+      .catch(next);
   }
 }
 

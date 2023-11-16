@@ -17,9 +17,52 @@
         <a href="/courses/{{this._id}}/edit">Sửa</a>
       </td>
       <td>
-        <a href="#">Xoá</a>
+        <a href="#" data-toggle="modal" data-target="#delete-course" data-id="{{this._id}}">Xoá</a>
       </td>
     </tr>
     {{/each}}
   </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="delete-course" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xoá khoá học</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắc chắn muốn xoá?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Huỷ</button>
+        <button id="btn-delete-course" type="button" class="btn btn-danger">Xoá</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Delete hidden form --}}
+<form name="delete-course-form" method="post"></form>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var id;
+    var deleteForm = document.forms['delete-course-form'];
+    // when dialog confirm clicked
+    $('#delete-course').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget)
+        id = button.data('id')
+    })
+    // when delete button clicked
+    var btnDeleteCourse = document.getElementById('btn-delete-course')
+    btnDeleteCourse.onclick = function() {
+      deleteForm.action = '/courses/' + id + '?_method=DELETE'
+      deleteForm.submit();
+    }
+  })
+  
+</script>
