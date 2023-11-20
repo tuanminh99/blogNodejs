@@ -4,7 +4,8 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col">Tên khoá học</th>
-      <th scope="col" colspan="4">Mô tả</th>
+      <th scope="col">Mô tả</th>
+      <th scope="col" colspan="4">Thời gian xoá</th>
     </tr>
   </thead>
   <tbody>
@@ -13,6 +14,7 @@
       <th scope="row">{{inc @index}}</th>
       <td>{{this.name}}</td>
       <td>{{this.des}}</td>
+      <td>{{this.deletedAt}}</td>
       <td>
         <a href="" class="btn-restore" data-id="{{this._id}}">Khôi phục</a>
       </td>
